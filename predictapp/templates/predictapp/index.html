@@ -1,0 +1,80 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Prediction</title>
+    <link rel="stylesheet" href="{% static 'predictapp/css/style.css' %}">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <h2 class="brand">
+                <a href="">Predictaz</a>
+            </h2>
+            <ul class="nav-links">
+                <li>
+                    <a href="">Predict</a>
+                </li>
+                <li>
+                    <a href="">Database</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <section class="input">
+                <div class="header">
+                    <h2>Fill in the Form to get course prediction</h2>
+                </div>
+
+                <form action="">
+                    {% csrf_token %}
+                    <select name="gender">
+                        <option value="">Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+
+                    <input type="text" name="grade" placeholder="Grade...">
+                    <input type="text" name="openness" placeholder="Openness...">
+                    <input type="text" name="agreeableness" placeholder="Agreeableness...">
+                    <input type="text" name="emotions" placeholder="Emotional stability...">
+                    <input type="text" name="conscientiousness" placeholder="Conscientiousness...">
+                    <input type="text" name="extraversion" placeholder="Extraversion...">
+
+                    <button type="submit" class="btn">Submit</button>    
+                </form>
+            </section>
+
+            <section class="output">
+                    <div class="header">
+                        <h1>Prediction Results</h1>
+                    </div>
+                    <div class="card">
+                        <div class="input-data">
+                            <p><strong>Gender:&nbsp;</strong></p>
+                            <p><strong>Gender:&nbsp;</strong></p>
+                            <p><strong>Gender:&nbsp;</strong></p>
+                            <p><strong>Gender:&nbsp;</strong></p>
+                            <p><strong>Gender:&nbsp;</strong></p>
+                            <p><strong>Gender:&nbsp;</strong></p>
+                        </div>
+
+                        <div class="output-data">
+                            <h2>Suggested Course</h2>
+                            <h4>Bsc. IT</h4>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </main>
+    
+</body>
+</html>
