@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
 from .models import Record
 
 # TO DO:::
@@ -17,7 +18,10 @@ def index(request):
 
 def database(request):
     records = Record.objects.all()
-    return render(request, 'predictapp/db.html', {'records': records})
+    paginator = Paginator(records, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'predictapp/db.html', {'records': records, 'page_obj': page_obj})
 
 
 def predict(request):
