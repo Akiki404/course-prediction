@@ -1,7 +1,76 @@
 {% extends 'predictapp/base.html' %}
 
+{% load static %}
+
 {% block title %}Database{%endblock %}
 
 {% block content %}
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 1rem 0;
+        text-align: center;
+    }
+
+    table td,
+    table th {
+        border: 1px solid rgb(19, 18, 18);
+        padding: 8px;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #e2dada;
+    }
+
+    table tr:hover {
+        background-color: #ddd;
+    }
+
+    table th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #054b46;
+        color: white;
+        text-align: center;
+    }
+</style>
+
+<div class="container">
+    {% if records %}
+
+    <table class="table">
+        <thead>
+            <th>#</th>
+            <th>Grade</th>
+            <th>Gender</th>
+            <th>Openness</th>
+            <th>Agreeableness</th>
+            <th>Emotions</th>
+            <th>Conscientiousness</th>
+            <th>Extraversion</th>
+            <th>Course</th>
+        </thead>
+        <tbody>
+            {% for record in records %}
+            <tr>
+                <td>{{record.pk}}</td>
+                <td>{{record.grade}}</td>
+                <td>{{record.gender}}</td>
+                <td>{{record.openness}}</td>
+                <td>{{record.agreeableness}}</td>
+                <td>{{record.emotions}}</td>
+                <td>{{record.conscientiousness}}</td>
+                <td>{{record.extraversion}}</td>
+                <td>{{record.course}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% endif %}
+</div>
 
 {% endblock %}

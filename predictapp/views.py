@@ -61,9 +61,12 @@ def predict(request):
         with open('/home/code/Projects/ML/Course/courses_pickle', 'rb') as f:
             md = pickle.load(f)
     
-        # Predict & return the results   
-        course = md.predict([ [gender, grade, openness, agreeableness, emotions, conscientiousness, extraversion] ]) #Pass the values from the form
-
+            # Predict & return the results   
+            course = md.predict([ [gender, grade, openness, agreeableness, emotions, conscientiousness, extraversion] ])[0] #Pass the values from the form
+        
+            record = Record(gender=gender, grade=grade, openness=openness, agreeableness=agreeableness, emotions=emotions, conscientiousness=conscientiousness, extraversion=extraversion, course=course)
+            record.save()
+        
         return render(request, 'predictapp/index.html',
             {
                 'gender': gender,
