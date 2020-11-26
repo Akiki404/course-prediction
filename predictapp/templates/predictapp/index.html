@@ -1,51 +1,29 @@
-{% load static %}
+{% extends 'predictapp/base.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Prediction</title>
-    <link rel="stylesheet" href="{% static 'predictapp/css/style.css' %}">
-</head>
-<body>
-    <nav>
-        <div class="container">
-            <h2 class="brand">
-                <a href="">Predictaz</a>
-            </h2>
-            <ul class="nav-links">
-                <li>
-                    <a href="">Predict</a>
-                </li>
-                <li>
-                    <a href="">Database</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    {% block title %}Courses {% endblock %}
 
+    {% block content %}
     <main>
         <div class="container">
             <section class="input">
                 <div class="header">
-                    <h2>Fill in the Form to get course prediction</h2>
+                    <h2>Get Course suggestion</h2>
                 </div>
 
-                <form action="">
+                <form action="{% url 'predictapp:predict' %}" method="POST">
                     {% csrf_token %}
                     <select name="gender">
-                        <option value="">Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
+                        <option value="1" name="male">Male</option>
+                        <option value="0" name="female">Female</option>
                     </select>
 
-                    <input type="text" name="grade" placeholder="Grade...">
-                    <input type="text" name="openness" placeholder="Openness...">
-                    <input type="text" name="agreeableness" placeholder="Agreeableness...">
-                    <input type="text" name="emotions" placeholder="Emotional stability...">
-                    <input type="text" name="conscientiousness" placeholder="Conscientiousness...">
-                    <input type="text" name="extraversion" placeholder="Extraversion...">
+                    <!-- TO DO::::: Input type for decimal -->
+                    <input type="text" name="grade" placeholder="Grade..." required>
+                    <input type="number" name="openness" placeholder="Openness..." required>
+                    <input type="number" name="agreeableness" placeholder="Agreeableness..." required>
+                    <input type="number" name="emotions" placeholder="Emotional stability..." required>
+                    <input type="number" name="conscientiousness" placeholder="Conscientiousness..." required>
+                    <input type="number" name="extraversion" placeholder="Extraversion..." required>
 
                     <button type="submit" class="btn">Submit</button>    
                 </form>
@@ -53,21 +31,25 @@
 
             <section class="output">
                     <div class="header">
-                        <h1>Prediction Results</h1>
+                        <h1>Suggestion Results</h1>
                     </div>
                     <div class="card">
                         <div class="input-data">
-                            <p><strong>Gender:&nbsp;</strong></p>
-                            <p><strong>Gender:&nbsp;</strong></p>
-                            <p><strong>Gender:&nbsp;</strong></p>
-                            <p><strong>Gender:&nbsp;</strong></p>
-                            <p><strong>Gender:&nbsp;</strong></p>
-                            <p><strong>Gender:&nbsp;</strong></p>
+                            <h3>Submitted Data</h3>
+                            <p><strong>Grade:&nbsp;</strong>
+                                {{ grade }}
+                            </p>
+                            <p><strong>Gender:&nbsp;</strong>{% if gender == 1 %}Male {% else %} Female {% endif %}</p>
+                            <p><strong>Openness:&nbsp;</strong>{{ openness }}</p>
+                            <p><strong>Agreeableness:&nbsp;</strong>{{ agreeableness }}</p>
+                            <p><strong>Emotions:&nbsp;</strong>{{ emotions }}</p>
+                            <p><strong>Conscientiousness:&nbsp;</strong>{{ conscientiousness }}</p>
+                            <p><strong>Extraversion:&nbsp;</strong>{{ extraversion }}</p>
                         </div>
 
                         <div class="output-data">
-                            <h2>Suggested Course</h2>
-                            <h4>Bsc. IT</h4>
+                            <h3>Suggested Course</h3>
+                            <h3 class="result">{{ course }}</h3>
                         </div>
                     </div>
                 </div>
@@ -75,6 +57,4 @@
             </section>
         </div>
     </main>
-    
-</body>
-</html>
+{% endblock %}

@@ -8,6 +8,8 @@ app_name = 'predictapp'
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('predict/', views.predict, name='predict'),
+    path('database/', views.database, name='db'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
